@@ -3,7 +3,7 @@ import { cutout } from "./helpers.ts";
 import {
 	CanvasImageSource,
 	CanvasRenderingContext2D,
-} from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+} from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
 const skew_a = 26 / 45;
 const skew_b = skew_a * 2;

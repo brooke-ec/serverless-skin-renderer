@@ -1,4 +1,4 @@
-import Canvas, { EmulatedCanvas2D, Image } from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+import Canvas, { EmulatedCanvas2D, Image } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 import { RenderPlayerSettings, render_legacy_player, render_player } from "./player.ts";
 import { cutout, has_transparency } from "./helpers.ts";
 

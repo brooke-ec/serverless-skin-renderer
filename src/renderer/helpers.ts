@@ -1,13 +1,12 @@
 import Canvas, {
 	CanvasImageSource,
 	EmulatedCanvas2D,
-} from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+} from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
 export function has_transparency(src: EmulatedCanvas2D): boolean {
 	const ctx = src.getContext("2d")!;
 	const data = ctx.getImageData(0, 0, src.width, src.height);
-	for (const pixel of data.data.filter((_, i) => (i + 1) % 4 == 0))
-		if (pixel < 255) return true;
+	for (const pixel of data.data.filter((_, i) => (i + 1) % 4 == 0)) if (pixel < 255) return true;
 	return false;
 }
 

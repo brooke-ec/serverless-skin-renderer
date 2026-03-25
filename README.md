@@ -1,12 +1,12 @@
 # Serverless Skin Renderer
 
-A serverless 3D Minecraft skin previewer, designed for [Deno Deploy](https://deno.com/deploy). Inspired by [Crafatar](https://crafatar.com/), built using [deno-canvas](https://deno.land/x/canvas@v1.4.1).
+A serverless 3D Minecraft skin previewer, designed for [Deno Deploy](https://deno.com/deploy). Inspired by [Crafatar](https://crafatar.com/), built using [deno-canvas](https://deno.land/x/canvas@v1.4.2).
 
 ## URL Parameters
 
--   `hash` - The SHA256 hash of the texture on `textures.minecraft.net`. For info on fetching a player's current skin hash, see [wiki.vg](https://wiki.vg/Mojang_API#UUID_to_Profile_and_Skin.2FCape).
--   `slim` - If `true` the skin will be rendered with 3 pixel wide arms.
--   `scale` - The scale at which to render the skin.
+- `hash` - The SHA256 hash of the texture on `textures.minecraft.net`. For info on fetching a player's current skin hash, see [wiki.vg](https://wiki.vg/Mojang_API#UUID_to_Profile_and_Skin.2FCape).
+- `slim` - If `true` the skin will be rendered with 3 pixel wide arms.
+- `scale` - The scale at which to render the skin.
 
 ## Examples
 

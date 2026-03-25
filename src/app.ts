@@ -1,4 +1,4 @@
-import { Image, dataURLtoFile, loadImage } from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+import { Image, dataURLtoFile, loadImage } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 import { serve } from "https://deno.land/std@0.184.0/http/server.ts";
 import render from "./renderer/mod.ts";
 
@@ -41,7 +41,8 @@ serve(async (request) => {
 	// render to canvas
 	const canvas = render(src, slim, scale);
 	const data = dataURLtoFile(canvas.toDataURL());
-	return new Response(data, {
+
+	return new Response(new Blob([Uint8Array.from(data)]), {
 		status: 200,
 		headers: {
 			...base_headers,

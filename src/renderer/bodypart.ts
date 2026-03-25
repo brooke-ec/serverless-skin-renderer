@@ -3,7 +3,7 @@ import render_cube, { RenderCubeSettings } from "./cube.ts";
 import {
 	CanvasImageSource,
 	CanvasRenderingContext2D,
-} from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+} from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
 const OVERLAY_SIZE = 0.5;
 
@@ -43,7 +43,7 @@ export default function render_bodypart(
 				texture_origin: overlay_origin,
 				flipped: flipped,
 				uv_size: size,
-		  }
+			}
 		: undefined;
 
 	// Overlay Backfaces
