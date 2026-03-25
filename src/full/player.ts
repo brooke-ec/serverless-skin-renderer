@@ -1,5 +1,5 @@
 import { FaceReference, Vector2, Vector3 } from "./mod.ts";
-import render_bodypart from "./bodypart.ts";
+import render_bodypart from "../helpers/bodypart.ts";
 import {
 	CanvasImageSource,
 	CanvasRenderingContext2D,

@@ -3,6 +3,14 @@ import Canvas, {
 	EmulatedCanvas2D,
 } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
+export const frontfaces: FaceReference[] = ["l", "f", "u"];
+export const backfaces: FaceReference[] = ["r", "b", "d"];
+export const all_faces: FaceReference[] = frontfaces.concat(backfaces);
+export type FaceReference = "l" | "f" | "r" | "b" | "u" | "d";
+
+export type Vector2 = [x: number, y: number];
+export type Vector3 = [x: number, y: number, z: number];
+
 export function has_transparency(src: EmulatedCanvas2D): boolean {
 	const ctx = src.getContext("2d")!;
 	const data = ctx.getImageData(0, 0, src.width, src.height);

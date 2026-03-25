@@ -1,6 +1,13 @@
-import { Image, dataURLtoFile, loadImage } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 import { serve } from "https://deno.land/std@0.184.0/http/server.ts";
-import render from "./renderer/mod.ts";
+import avatar from "./avatar/mod.ts";
+import full from "./full/mod.ts";
+import head from "./head/mod.ts";
+import {
+	EmulatedCanvas2D,
+	Image,
+	dataURLtoFile,
+	loadImage,
+} from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
 const BASE_PROFILE_URL = "https://sessionserver.mojang.com/session/minecraft/profile/";
 const BASE_TEXTURE_URL = "https://textures.minecraft.net/texture/";
@@ -71,7 +78,13 @@ serve(async (request) => {
 	}
 
 	// render to canvas
-	const canvas = render(src, slim, scale);
+	let canvas: EmulatedCanvas2D;
+
+	if (url.pathname === "/avatar") canvas = avatar(src, scale);
+	else if (url.pathname === "/head") canvas = head(src, scale);
+	else if (url.pathname === "/full") canvas = full(src, slim, scale);
+	else return error(404, "Unknown render type.");
+
 	const data = dataURLtoFile(canvas.toDataURL());
 
 	return new Response(new Blob([Uint8Array.from(data)]), {

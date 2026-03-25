@@ -1,5 +1,5 @@
 import { FaceReference, Vector2, Vector3, all_faces } from "./mod.ts";
-import { cutout } from "./helpers.ts";
+import { cutout } from "./mod.ts";
 import {
 	CanvasImageSource,
 	CanvasRenderingContext2D,
