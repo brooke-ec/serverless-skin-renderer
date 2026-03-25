@@ -1,4 +1,4 @@
-import { FaceReference, Vector2, Vector3 } from "./mod.ts";
+import { FaceReference, Vector2, Vector3 } from "../helpers/mod.ts";
 import render_bodypart from "../helpers/bodypart.ts";
 import {
 	CanvasImageSource,

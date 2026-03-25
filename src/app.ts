@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/std@0.184.0/http/server.ts";
 import avatar from "./avatar/mod.ts";
 import full from "./full/mod.ts";
 import head from "./head/mod.ts";
@@ -24,7 +23,7 @@ function error(status: number, reason: string) {
 	});
 }
 
-serve(async (request) => {
+Deno.serve(async (request) => {
 	const url = new URL(request.url);
 	const uuid = url.searchParams.get("uuid");
 	const scale = Number(url.searchParams.get("scale") ?? 10);
