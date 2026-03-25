@@ -10,10 +10,7 @@ import {
 } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
 const BASE_PROFILE_URL = "https://sessionserver.mojang.com/session/minecraft/profile/";
-const BASE_TEXTURE_URL = "https://textures.minecraft.net/texture/";
-
 const RE_UUID = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/;
-const RE_HASH = /^[a-f\d]+$/;
 
 const base_headers = {
 	"Cache-Control": "max-age=31536000, immutable, public",
@@ -30,15 +27,17 @@ function error(status: number, reason: string) {
 serve(async (request) => {
 	const url = new URL(request.url);
 	const uuid = url.searchParams.get("uuid");
-	const hash = url.searchParams.get("hash");
 	const scale = Number(url.searchParams.get("scale") ?? 10);
 
 	if (isNaN(scale)) return error(400, "Search parameter 'scale' must be a valid number.");
 
 	if (scale > 10) return error(400, "Value of 'scale' must not be greater than 10.");
 
-	let skin_url: string;
-	let slim = false;
+	let skin_url = url.searchParams.get("url");
+	let slim = url.searchParams.get("slim") == "true";
+
+	if (skin_url && uuid)
+		return error(400, "Search parameters 'url' and 'uuid' are mutually exclusive.");
 
 	if (uuid) {
 		if (!RE_UUID.test(uuid)) return error(400, "The provided UUID is invalid.");
@@ -64,11 +63,9 @@ serve(async (request) => {
 
 		skin_url = decoded.textures.SKIN.url;
 		slim = decoded.textures.SKIN.metadata?.model === "slim";
-	} else if (hash) {
-		if (!RE_HASH.test(hash)) return error(400, "The provided hash is invalid.");
-		slim = url.searchParams.get("slim") == "true";
-		skin_url = BASE_TEXTURE_URL + hash;
-	} else return error(400, "Required either 'hash' or 'uuid' search parameters.");
+	}
+
+	if (!skin_url) return error(400, "Search parameter 'uuid' or 'url' is required.");
 
 	let src: Image | undefined;
 	try {
